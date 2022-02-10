@@ -15,7 +15,7 @@ const postData = [
     {
         title: "CSS Frameworks",
         content: "Do any professional web developers use plain css?",
-        user_id:3
+        user_id: 3
     }
 ]
 
