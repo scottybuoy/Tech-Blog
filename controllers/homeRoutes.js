@@ -3,7 +3,7 @@ const { User, Post } = require("../models");
 
 router.get("/", async (req, res) => {
     try {
-        const postData = await Post.findAll({
+        const dbpostData = await Post.findAll({
             include: [
                 {
                     model: User,
@@ -11,10 +11,11 @@ router.get("/", async (req, res) => {
                 },
             ],
         });
+        console.log("testing");
 
-        const posts = postData.map((post) => post.toJSON());
-
-        res.render("homepage", { posts });
+        // const posts = dbpostData.map((post) => post.toJSON());
+        const posts = dbpostData.map((post) => post.get({ plain: true }));
+        res.render("homepage", posts);
 
     } catch (err) {
         res.status(500).json(err);

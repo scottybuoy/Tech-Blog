@@ -17,8 +17,9 @@ const postData = [
         content: "Do any professional web developers use plain css?",
         user_id: 3
     }
-]
+];
 
 const seedPosts = () => Post.bulkCreate(postData);
 
 module.exports = seedPosts;
+
