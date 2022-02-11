@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { User, Post } = require("../models");
 
 router.get("/", async (req, res) => {
+    req.session.logged_in = false;
     try {
         const dbpostData = await Post.findAll({
             include: [
@@ -11,15 +12,42 @@ router.get("/", async (req, res) => {
                 },
             ],
         });
-        console.log("testing");
+        console.log("dbpost" + dbpostData);
 
         // const posts = dbpostData.map((post) => post.toJSON());
         const posts = dbpostData.map((post) => post.get({ plain: true }));
-        res.render("homepage", posts);
+        res.render("homepage", { posts });
 
     } catch (err) {
         res.status(500).json(err);
     }
+});
+
+router.get("/signup", (req, res) => {
+    if (req.session.logged_in) {
+        res.redirect("./dashboard");
+        return;
+    }
+
+    res.render("signup");
+})
+
+router.get("/dashboard", (req, res) => {
+    if (!req.session.logged_in) {
+        res.redirect("./login");
+        return;
+    }
+
+    res.render("dashboard")
+})
+
+router.get("/login", (req, res) => {
+    if (req.session.logged_in) {
+        res.redirect("./dashboard");
+        return;
+    }
+
+    res.render("login");
 })
 
 module.exports = router;

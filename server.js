@@ -25,7 +25,7 @@ const sesh = {
 
 app.use(session(sesh));
 const hbs = exphbs.create({ helpers });
-app.engine("handlebbars", hbs.engine);
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 app.use(express.json());
