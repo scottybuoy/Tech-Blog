@@ -51,10 +51,12 @@ router.get("/login", (req, res) => {
 router.get('/post/:id', async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
-            include: [{ all: true, nested: true }]
+            include: [{ all: true, nested: true }], 
         });
 
         const post = postData.get({ plain: true });
+        console.log('**********************');
+        console.log('POST' + post)
 
         res.render('post', {
             ...post,

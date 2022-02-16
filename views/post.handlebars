@@ -1,8 +1,9 @@
 <h2>{{title}}</h2>
 <h4>{{user.username}}</h4>
 <p>{{content}}</p>
+<p>hello {{comment.content}}</p>
 {{#if logged_in}}
-<form id="comment-form" data-id="{{post.id}}">
+<form id="comment-form" data-id="{{id}}">
     <div class="form-group">
         <label for="comment">Comment</label>
         <textarea class="form-control" id="comment-input" rows="3"></textarea>
