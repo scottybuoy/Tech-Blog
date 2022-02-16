@@ -13,12 +13,14 @@
         <nav>
             
             <a href="/">HOME</a>
-            {{!-- {{#if logged_in}} --}}
+            {{#if logged_in}}
             <a href="/dashboard">DASHBOARD</a>
-            {{!-- {{else}} --}}
+           <button class="no-button" id="log-out">LOG OUT</button>
+            {{else}}
             <a href="/login">LOG IN</a>
             <a href="/signup">SIGN UP</a>
-            {{!-- {{/if}} --}}
+            
+            {{/if}}
         </nav>
     </header>
     <main>
