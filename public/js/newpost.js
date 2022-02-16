@@ -3,5 +3,6 @@ const newPostHandler = (event) => {
 
     const title = document.querySelector('#new-post-title').value;
     const content = document.querySelector('#new-post-content').value;
-    
+
+    const response = await fetch('api/')
 }
