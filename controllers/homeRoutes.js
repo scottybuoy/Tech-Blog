@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { User, Post } = require("../models");
 
+
+// Homepage -- display all posts
 router.get("/", async (req, res) => {
-    // req.session.logged_in = false;
     try {
         const dbpostData = await Post.findAll({
             include: [
@@ -23,6 +24,8 @@ router.get("/", async (req, res) => {
     }
 });
 
+
+// Display signup form
 router.get("/signup", (req, res) => {
     if (req.session.logged_in) {
         res.redirect("./dashboard");
@@ -32,15 +35,8 @@ router.get("/signup", (req, res) => {
     res.render("signup");
 })
 
-// router.get("/dashboard", (req, res) => {
-//     if (!req.session.logged_in) {
-//         res.redirect("./login");
-//         return;
-//     }
 
-//     res.render("dashboard")
-// })
-
+// Display log in form
 router.get("/login", (req, res) => {
     if (req.session.logged_in) {
         res.redirect("/");
@@ -49,5 +45,30 @@ router.get("/login", (req, res) => {
 
     res.render("login");
 })
+
+
+// Display single post
+router.get('/post/:id', async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        });
+
+        const post = postData.get({ plain: true });
+
+        res.render('post', {
+            ...post,
+            logged_in: req.session.logged_in
+        });
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;
