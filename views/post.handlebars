@@ -1,8 +1,10 @@
 <h2>{{title}}</h2>
 <h4>{{user.username}}</h4>
 <p>{{content}}</p>
-{{!-- {{> comment-details post.comment}} --}}
-{{!-- <p>{{post.comment.content}}</p> --}}
+{{#each comments as |comment|}}
+    <p>{{content}}</p>
+{{/each}}
+{{!-- <p>{{post.comments.content}}</p> --}}
 {{#if logged_in}}
 <form id="comment-form" data-id="{{id}}">
     <div class="form-group">

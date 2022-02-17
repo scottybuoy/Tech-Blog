@@ -31,6 +31,9 @@ router.post('/', async (req, res) => {
         });
 
         res.json(newPost);
+        console.log('*************************')
+        console.log(newPost);
+        
     } catch (err) {
         console.error(err);
     }

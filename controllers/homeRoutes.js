@@ -51,40 +51,42 @@ router.get("/login", (req, res) => {
 router.get('/post/:id', async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
-            // include: [{ all: true, nested: true }],
-            attributes: [
-                'id',
-                'content',
-                'title',
-                'created_at'
-            ],
-            include: [{
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                },
-                {
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
+            include: [{ all: true, nested: true }],
+            // attributes: [
+            //     'id',
+            //     'content',
+            //     'title',
+            //     'created_at'
+            // ],
+            // include: [{
+            //         model: Comment,
+            //         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+            //         include: {
+            //             model: User,
+            //             attributes: ['username']
+            //         }
+            //     },
+            //     {
+            //         model: User,
+            //         attributes: ['username']
+            //     }
+            // ]
         });
 
         const post = postData.get({ plain: true });
-        console.log('**********************');
-        console.log('POST' + post)
+       
 
         res.render('post', {
             ...post,
             logged_in: req.session.logged_in
         });
+        console.log('**********************');
+        console.log('POST' + JSON.stringify(post))
 
     } catch (err) {
         res.status(500).json(err);
     }
+    
 });
 
 
