@@ -1,4 +1,4 @@
-<h2>{{title}}</h2>
+{{!-- <h2>{{title}}</h2>
 <h4>{{user.username}}</h4>
 <p>posted {{format_date date_created}}</p>
 <p>{{content}}</p>
@@ -8,7 +8,6 @@
     <p>{{format_date date_created}}</p>
 
 {{/each}}
-{{!-- <p>{{post.comments.content}}</p> --}}
 {{#if logged_in}}
 <form id="comment-form" data-id="{{id}}">
     <div class="form-group">
@@ -25,5 +24,75 @@
 
 {{#if logged_in}}
     <script src="/js/comments.js"></script>
+{{/if}} --}}
+
+<section class="row mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-9">
+            <h2>{{title}}</h2>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-9 d-flex justify-content-start my-auto post-title-line">
+            <h5>by {{user.username}}</h5>
+            <p class="post-date">{{format_date date_created}}</p>
+        </div>
+    </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-9 mt-4">
+            <p>{{content}}</p>
+        </div>
+</section>
+
+<section class="row">
+    {{#each comments as |comment|}}
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-9 d-flex justify-content-start">
+            <p>{{user.username}}</p>
+            <p class="post-date">{{format_date date_created}}</p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+         <div class="col-12 col-md-9 ">
+             <p class="post-comment">"{{content}}"</p>
+         </div>
+    </div>
+    {{/each}}
+</section>
+
+
+
+
+
+
+
+{{#if logged_in}}
+<section class="row d-flex justify-content-center">
+    <div class="col-12 col-md-9">
+        <form id="comment-form" data-id="{{id}}">
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <textarea class="form-control" id="comment-input" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary custom-button" type="submit">
+                Comment
+                </button>
+             </div>
+        </form>
+    </div>
+</section>
 {{/if}}
 
+
+
+
+
+
+
+
+
+{{#if logged_in}}
+    <script src="/js/comments.js"></script>
+{{/if}}

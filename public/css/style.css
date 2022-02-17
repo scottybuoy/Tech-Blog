@@ -1,3 +1,75 @@
 body{
-    background-color: antiquewhite;
+    background-color: rgb(245, 245, 245);
+}
+
+#logo {
+    color: rgb(43, 43, 43);
+}
+
+.no-button {
+    background-color: transparent;
+    border-style: none;
+}
+
+.post-link {
+    background-color: rgb(236, 236, 236);
+    border-radius: 11px;
+}
+
+a {
+    text-decoration: none;
+    color:rgb(138, 138, 138)
+}
+
+a:hover {
+    color:rgb(172, 172, 172);
+}
+
+.post-title-home {
+
+}
+
+.post-content-home {
+    color:rgb(165, 165, 165);
+}
+
+.post-date {
+    padding-left: 10px;
+    font-style: italic;
+    color:rgb(160, 160, 160)
+}
+
+.post-title-line {
+    border-style: solid;
+    border-width: 0px 0px 3px 0px;
+
+    color:rgb(110, 110, 110);
+}
+
+.post-comment {
+    margin-top: -10px;
+    padding-bottom: 20px;
+}
+
+.custom-button {
+    margin-top: 15px;
+}
+
+#new-post-btn {
+    color: white;
+    background-color: rgb(99, 99, 99);
+    border-radius: 100px;
+}
+
+#post-button {
+    color: rgb(230, 230, 230);
+}
+
+.up-del-btn {
+    color: rgb(230, 230, 230);
+    background-color: rgb(102, 102, 102);
+    border-style: none;
+    border-radius: 10px;
+    padding: 7px;
+    margin-top: 15px;
 }
