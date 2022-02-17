@@ -1,13 +1,40 @@
 const router = require("express").Router();
-// const { User, Post } = require("../models");
+const sequelize = require('../config/connection');
+const { User, Post, Comment } = require("../models");
 
-router.get('/', (req, res) => {
-    // if (!req.session.logged_in) {
-    //     res.redirect("./login");
-    //     return;
-    // }
+router.get('/', async (req, res) => {
+    try{
+        const postData = await Post.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            include: [
+                {
+                    model: Comment,
+                    attributes: ['id', 'content', 'post_id', 'user_id'],
+                    include: {
+                        model: User,
+                        attriutes: ['username']
+                    }
+                },
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        });
 
-    res.render("dashboard", { logged_in: req.session.logged_in })
+        const posts = postData.map((post) => post.get({ plain: true }))
+
+        res.render("dashboard", { 
+            posts,
+            logged_in: req.session.logged_in,
+        });
+        
+    } catch (err) {
+        console.error(err);
+    }
+    
 })
 
 router.get('/new', (req, res) => {
