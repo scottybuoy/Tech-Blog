@@ -2,7 +2,12 @@
 <div>
     <h2>Posts</h2>
     {{#each posts as |post|}}
-        <h4>{{post.title}}</h4>
+    <a href="/dashboard/post/{{post.id}}">
+    <div>
+            <h4>{{post.title}}</h4>
+            <h6>{{format_date date_created}}</h6>
+    </div>
+    </a>
     {{/each}}
 </div>
 

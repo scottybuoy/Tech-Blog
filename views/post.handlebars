@@ -1,8 +1,12 @@
 <h2>{{title}}</h2>
 <h4>{{user.username}}</h4>
+<p>posted {{format_date date_created}}</p>
 <p>{{content}}</p>
 {{#each comments as |comment|}}
     <p>{{content}}</p>
+    <p>{{user.username}}</p>
+    <p>{{format_date date_created}}</p>
+
 {{/each}}
 {{!-- <p>{{post.comments.content}}</p> --}}
 {{#if logged_in}}

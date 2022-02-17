@@ -52,25 +52,7 @@ router.get('/post/:id', async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             include: [{ all: true, nested: true }],
-            // attributes: [
-            //     'id',
-            //     'content',
-            //     'title',
-            //     'created_at'
-            // ],
-            // include: [{
-            //         model: Comment,
-            //         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-            //         include: {
-            //             model: User,
-            //             attributes: ['username']
-            //         }
-            //     },
-            //     {
-            //         model: User,
-            //         attributes: ['username']
-            //     }
-            // ]
+    
         });
 
         const post = postData.get({ plain: true });

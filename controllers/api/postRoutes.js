@@ -39,4 +39,29 @@ router.post('/', async (req, res) => {
     }
 })
 
+
+// Update Post
+router.put('/:id', async (req, res) => {
+    try {
+        const updatePost = await Post.update({
+            content: req.body.content
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        });
+
+        if(!updatePost) {
+            console.error('No post with this id')
+        }
+
+        res.json(updatePost);
+
+    } catch (err) {
+        console.error(err);
+    }
+    
+});
+
 module.exports = router;

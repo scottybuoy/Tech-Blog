@@ -30,13 +30,39 @@ router.get('/', async (req, res) => {
             posts,
             logged_in: req.session.logged_in,
         });
-        
+
     } catch (err) {
         console.error(err);
     }
     
 })
 
+
+// Show Post on user dashboard
+router.get('/post/:id', async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [{ all: true, nested: true }],
+            // attributes: [
+            //     'id',
+            //     'title',
+            //     'content',
+            //     'date_created'
+            // ]
+        });
+
+        const post = postData.get({ plain: true });
+
+        res.render('edit-post', { post, logged_in: req.session.logged_in })
+
+    } catch (err) {
+        console.error(err);
+    }
+   
+});
+
+
+// New Post form
 router.get('/new', (req, res) => {
     res.render('new-post');
 })
