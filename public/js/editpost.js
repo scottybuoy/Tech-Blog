@@ -5,8 +5,7 @@ const editPostHandler = async (event) => {
     const content = document.querySelector('#edit-post-content').value.trim();
     const id = document.querySelector('#edit-post-form').getAttribute('data-id');
 
-    console.log('++++++++++++++++++++')
-    console.log(content);
+   
 
     const response = await fetch(`/api/post/${id}`, {
         method: 'PUT',

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 
+// show all posts
 router.get('/', async (req, res) => {
     const postData = await Post.findAll({
         attributes: ['id', 'title', 'content'],
@@ -20,8 +21,12 @@ router.get('/', async (req, res) => {
         }
     ]
     })
-})
 
+    res.json(postData);
+});
+
+
+// create new post 
 router.post('/', async (req, res) => {
     try {
         const newPost = await Post.create({
@@ -64,5 +69,30 @@ router.put('/:id', async (req, res) => {
     }
     
 });
+
+
+// Delete post
+router.delete('/:id', async (req, res) => {
+    try {
+        const postData = await Post.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id,
+            }
+        });
+
+        if (!postData) {
+            console.error('no project found with this id')
+        }
+
+        res.json(postData);
+
+    } catch (err) {
+        console.error(err);
+    }
+})
+
+
+
 
 module.exports = router;
